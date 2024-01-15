@@ -26,6 +26,7 @@ import { isBase64Image } from "@/lib/utils";
 import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
 
+
 interface Props {
   user: {
     id: string;
@@ -39,9 +40,10 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
-  const router = useRouter();
-  const pathname = usePathname();
+  const router  = useRouter();
+  const  pathname  = usePathname();
   const { startUpload } = useUploadThing("media");
+  
 
   const [files, setFiles] = useState<File[]>([]);
 
@@ -62,8 +64,8 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     if (hasImageChanged) {
       const imgRes = await startUpload(files);
 
-      if (imgRes && imgRes[0].fileUrl) {
-        values.profile_photo = imgRes[0].fileUrl;
+      if (imgRes && imgRes[0].url) {
+        values.profile_photo = imgRes[0].url;
       }
     }
 
@@ -74,9 +76,10 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       userId: user.id,
       bio: values.bio,
       image: values.profile_photo,
+      
     });
 
-    if (pathname === "/profile/edit") {
+    if (pathname === '/profile/edit') {
       router.back();
     } else {
       router.push("/");
@@ -146,6 +149,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage/>
             </FormItem>
           )}
         />

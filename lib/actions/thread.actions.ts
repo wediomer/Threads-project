@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 interface Params{
     text: string,
     author: string,
-    communityId: string,
+    communityId: string | null,
     path: string,
 }
 
@@ -22,7 +22,7 @@ export async function createThread({
         community:null,
     });
     //update user model
-    await User.findByIdAndUpdate(author,{
+    await User.findByIdAndUpdate(author, {
         $push: { threads: createThread._id}
     })
     revalidatePath(path);
