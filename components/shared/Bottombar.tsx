@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname} from "next/navigation";
 
-function Bottombar(){
+function Bottombar({ userId }: { userId: string }){
     const pathname= usePathname();
     return (
         <section className="bottombar">
