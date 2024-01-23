@@ -23,13 +23,17 @@ const ThreadsTab = async ({currentUserId, accountId, accountType}:
             currentUserId={currentUserId}
             parentId={thread.parentId}
             content={thread.text}
-            author={thread.author} // tod0
+            author={
+                accountType === 'User'
+                ? { name: result.name, image: result.image, id: result.id}:
+                { name: thread.author.name, image: thread.author.image, id: thread.author.id}
+            } 
             community={thread.community} // todo
             createdAt={thread.createdAt}
             comments={thread.children}
             />
             ))}
-            ThreadsTab
+            
         </section>
     )
 }
